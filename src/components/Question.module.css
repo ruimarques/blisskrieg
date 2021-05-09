@@ -1,0 +1,17 @@
+.item {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.item img {
+  margin-right: 24px;
+}
+
+.item:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.choices {
+  margin-left: 8px;
+}
