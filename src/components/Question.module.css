@@ -1,6 +1,10 @@
 .item {
   display: flex;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+}
+
+.itemContent {
+  padding: 4px 0;
 }
 
 .item img {
@@ -8,10 +12,15 @@
 }
 
 .item:hover {
-  background-color: lightgray;
+  background-color: rgba(50, 152, 220, 0.1);
   cursor: pointer;
 }
 
+.question {
+  font-weight: bold;
+}
+
 .choices {
-  margin-left: 8px;
+  margin-left: 26px;
+  font-size: 13px;
 }

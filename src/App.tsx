@@ -1,7 +1,8 @@
 import './App.css';
 import 'bulma/css/bulma.min.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import QuestionsComponent from './Questions';
+import QuestionsPage from './QuestionsPage';
+import LoadingPage from './LoadingPage';
 
 // GET https://private-bbbe9-blissrecruitmentapi.apiary-mock.com/questions?limit={limit}&offset={offset}&filter={filter}
 // GET /health
@@ -19,7 +20,7 @@ function App() {
           <Details />
         </Route>
         <Route path="/questions">
-          <QuestionsComponent />
+          <QuestionsPage />
         </Route>
         <Route path="/share">
           <Share />
@@ -28,7 +29,7 @@ function App() {
           <Offline />
         </Route>
         <Route path="/">
-          <Loading />
+          <LoadingPage />
         </Route>
       </Switch>
     </Router>
@@ -47,7 +48,4 @@ function Offline() {
   return <h2>Offline</h2>;
 }
 
-function Loading() {
-  return <h2>Loading</h2>;
-}
 export default App;

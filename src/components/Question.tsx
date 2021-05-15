@@ -1,15 +1,17 @@
-import { QuestionsResponse } from '../Questions';
+import { QuestionsResponse } from '../QuestionsPage';
 import styles from './Question.module.css';
 
-const Question = (props: {
+const QuestionComponent = (props: {
   question: QuestionsResponse;
   selected: (q: QuestionsResponse) => void;
 }) => {
   return (
     <li className={styles.item} onClick={() => props.selected(props.question)}>
       <img src={props.question.thumb_url} alt={props.question.question}></img>
-      <div>
-        <h3>{`${props.question.id} - ${props.question.question}`}</h3>
+      <div className={styles.itemContent}>
+        <h3
+          className={styles.question}
+        >{`${props.question.id} - ${props.question.question}`}</h3>
         <ul className={styles.choices}>
           {props.question.choices.map((a, i) => (
             <li key={i}>{`${a.choice} (${a.votes} Votes)`}</li>
@@ -20,4 +22,4 @@ const Question = (props: {
   );
 };
 
-export default Question;
+export default QuestionComponent;
