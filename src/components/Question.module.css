@@ -1,26 +1,41 @@
 .item {
   display: flex;
+  width: 100%;
   margin-bottom: 8px;
 }
 
 .itemContent {
-  padding: 4px 0;
+  width: 100%;
+  max-width: 350px;
+  padding: 4px 4px 4px 0;
 }
 
 .item img {
   margin-right: 24px;
 }
 
-.item:hover {
+.item.selectable:hover {
   background-color: rgba(50, 152, 220, 0.1);
   cursor: pointer;
 }
 
 .question {
   font-weight: bold;
+  margin-bottom: 8px;
 }
 
 .choices {
   margin-left: 26px;
   font-size: 13px;
+}
+
+.choiceText {
+  display: flex;
+  align-items: center;
+}
+
+.choices li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
 }

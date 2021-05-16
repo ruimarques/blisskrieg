@@ -1,0 +1,14 @@
+.content {
+  margin: 40px 200px;
+}
+
+.questionContainer {
+  display: flex;
+  margin-bottom: 40px;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}

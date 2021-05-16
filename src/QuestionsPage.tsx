@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { API_ENDPOINT, PAGING_LIMIT } from './global-constants';
 import SearchComponent from './components/Search';
 import QuestionComponent from './components/Question';
 import PaginationComponent from './components/Pagination';
 import HeaderComponent from './components/Header';
 import styles from './QuestionsPage.module.css';
+import { getBaseUrl, useQuery } from './utils';
+import LoadingComponent from './components/Loading';
 
 export interface QuestionsResponse {
   id: number;
@@ -19,22 +21,17 @@ export interface QuestionsResponse {
   }[];
 }
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-
 const QuestionsPage = () => {
   const query = useQuery();
-
+  const history = useHistory();
   const filter = query.get('filter');
 
-  const history = useHistory();
   const [questions, setQuestions] = useState<QuestionsResponse[]>([]);
   const [searchInput, setSearchInput] = useState<string | null>(null);
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const shareUrl = `/questions?limit=${PAGING_LIMIT}&offset=${offset}&filter=${filter}`;
+  const shareUrl = `/share?url=${getBaseUrl()}/questions?filter=${searchInput}`;
 
   useEffect(() => {
     setLoading(true);
@@ -45,7 +42,6 @@ const QuestionsPage = () => {
     )
       .then((data) => data.json())
       .then((data: QuestionsResponse[]) => {
-        // console.log(data);
         setQuestions(data);
         setLoading(false);
       });
@@ -87,15 +83,22 @@ const QuestionsPage = () => {
         <h2 className={styles.listTitle}>
           {filter != null ? 'Search results' : 'List of all questions'}
         </h2>
-        <ul>
-          {questions.map((listitem) => (
-            <QuestionComponent
-              question={listitem}
-              selected={onSelectedQuestion}
-              key={listitem.id}
-            />
-          ))}
-        </ul>
+
+        {loading && !questions.length ? (
+          <LoadingComponent />
+        ) : (
+          <ul>
+            {questions.map((listitem) => (
+              <li key={listitem.id}>
+                <QuestionComponent
+                  question={listitem}
+                  selected={onSelectedQuestion}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+
         {questions.length && (
           <PaginationComponent
             offset={offset}
