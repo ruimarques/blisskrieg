@@ -18,7 +18,9 @@ const QuestionComponent = (props: {
       className={questionClasses.join(' ')}
       onClick={() => props.selected && props.selected(props.question)}
     >
-      <img src={props.question.thumb_url} alt={props.question.question}></img>
+      <div className={styles.imgContainer}>
+        <img src={props.question.thumb_url} alt={props.question.question}></img>
+      </div>
       <div className={styles.itemContent}>
         <h3 className={styles.question}>{questionText}</h3>
         <ul className={styles.choices}>

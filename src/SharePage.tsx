@@ -55,10 +55,7 @@ const SharePage = () => {
           <div className="field-label"></div>
           <div className="field-body">
             <div className="control">
-              <button
-                className="button is-primary"
-                onClick={() => onSend(input)}
-              >
+              <button className="button is-info" onClick={() => onSend(input)}>
                 Send
               </button>
             </div>

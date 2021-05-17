@@ -7,11 +7,14 @@
 .itemContent {
   width: 100%;
   max-width: 350px;
-  padding: 4px 4px 4px 0;
 }
 
-.item img {
+.imgContainer {
   margin-right: 24px;
+}
+
+.imgContainer img {
+  min-width: 120px;
 }
 
 .item.selectable:hover {
