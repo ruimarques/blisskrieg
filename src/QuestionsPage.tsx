@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import styles from './QuestionsPage.module.css';
+import appStyles from './App.module.css';
 import { API_ENDPOINT, PAGING_LIMIT } from './global-constants';
 import SearchComponent from './components/Search';
 import QuestionComponent from './components/Question';
 import PaginationComponent from './components/Pagination';
 import HeaderComponent from './components/Header';
-import styles from './QuestionsPage.module.css';
 import { getBaseUrl, useQuery } from './utils';
 import LoadingComponent from './components/Loading';
 
@@ -31,7 +32,8 @@ const QuestionsPage = () => {
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const shareUrl = `/share?url=${getBaseUrl()}/questions?filter=${searchInput}`;
+  const urlToShare = `${getBaseUrl()}/questions?filter=${searchInput}`;
+  const sharePath = encodeURI(`/share?url=${urlToShare}`);
 
   useEffect(() => {
     setLoading(true);
@@ -63,7 +65,7 @@ const QuestionsPage = () => {
   return (
     <>
       <HeaderComponent title="Questions List" />
-      <section className={styles.content}>
+      <section className={appStyles.content}>
         <div className={styles.search}>
           <SearchComponent<QuestionsResponse[]>
             query={filter}
@@ -75,7 +77,7 @@ const QuestionsPage = () => {
             onCancel={() => setSearchInput(null)}
           />
           {searchInput && (
-            <a href={shareUrl}>{'Share search result: ' + searchInput}</a>
+            <a href={sharePath}>{'Share search result: ' + searchInput}</a>
           )}
         </div>
 

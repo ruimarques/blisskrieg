@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import appStyles from './App.module.css';
+import styles from './DetailsPage.module.css';
 import HeaderComponent from './components/Header';
 import QuestionComponent from './components/Question';
 import { API_ENDPOINT } from './global-constants';
 import { QuestionsResponse } from './QuestionsPage';
-import styles from './DetailsPage.module.css';
 import LoadingComponent from './components/Loading';
+import { getBaseUrl } from './utils';
 
 type DetailsParams = {
   id: string;
@@ -29,12 +31,13 @@ const updateQuestionVote = (question: QuestionsResponse, choice: number) => {
   };
 };
 
-// /share?destination_email={destination_email}&content_url={content_url}
-
 const DetailsPage = () => {
   const [loading, setLoading] = useState(false);
   const [question, setQuestion] = useState<QuestionsResponse | null>(null);
   let { id } = useParams<DetailsParams>();
+
+  const urlToShare = `${getBaseUrl()}/questions/${id}`;
+  const sharePath = encodeURI(`/share?url=${urlToShare}`);
 
   useEffect(() => {
     setLoading(true);
@@ -61,7 +64,7 @@ const DetailsPage = () => {
   return (
     <>
       <HeaderComponent title="Question Details" />
-      <section className={styles.content}>
+      <section className={appStyles.content}>
         {loading ? (
           <LoadingComponent />
         ) : (
@@ -79,7 +82,7 @@ const DetailsPage = () => {
             Back to List
           </a>
           {question && (
-            <a className={`button is-info`} href="/share">
+            <a className={`button is-info`} href={sharePath}>
               Share
             </a>
           )}
