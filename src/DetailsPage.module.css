@@ -1,0 +1,13 @@
+.questionContainer {
+  display: flex;
+  margin-bottom: 40px;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+}
+
+.actions :last-child {
+  margin-left: 12px;
+}
